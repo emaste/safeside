@@ -26,7 +26,15 @@ apt_install() {
   sudo apt install "$@"
 }
 
-OS_COMPILER_CPU=${TRAVIS_OS_NAME}_${TRAVIS_COMPILER}_${TRAVIS_CPU_ARCH}
+if [ "$CIRRUS_CI" = true ]; then
+  OS=$CIRRUS_OS
+else
+  OS=${TRAVIS_OS_NAME}
+  COMPILER=${TRAVIS_COMPILER}
+  CPU_ARCH=${TRAVIS_CPU_ARCH}
+fi
+
+OS_COMPILER_CPU=${OS}_${COMPILER}_${CPU_ARCH}
 case "${OS_COMPILER_CPU}" in
   linux_clang_*)
     apt_install "linux-headers-$(uname -r)"
@@ -59,6 +67,10 @@ case "${OS_COMPILER_CPU}" in
   linux_gcc_*)
     apt_install "linux-headers-$(uname -r)"
 
+    generate_and_build build
+    ;;
+
+  freebsd*)
     generate_and_build build
     ;;
 esac
