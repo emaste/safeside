@@ -35,7 +35,7 @@ else()
   set(ASM_EXT S)
 endif()
 
-if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "^(i[3456]86)|(x86_64)|(x86)|(AMD64)$")
+if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "^(i[3456]86)|(x86_64)|(x86)|(amd64)$")
   # Flatten all these names down to x86 or x86_64.
 
   # On Windows the processor string is "AMD64" even if we're compiling for
