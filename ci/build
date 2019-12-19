@@ -29,7 +29,7 @@ apt_install() {
 if [ "$CIRRUS_CI" = true ]; then
   OS=$CIRRUS_OS
   COMPILER=clang
-  CPU_ARCH=amd64
+  CPU_ARCH=x86_64
 else
   OS=${TRAVIS_OS_NAME}
   COMPILER=${TRAVIS_COMPILER}
